@@ -1,6 +1,5 @@
-// core/domain/Pool.ts
 export interface Pool {
-    readonly poolId: string;
+    readonly id: string;
     readonly year: number;
     readonly createdAt: Date;
 }

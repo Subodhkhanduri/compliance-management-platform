@@ -1,0 +1,17 @@
+import { Pool } from 'pg';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+// Single shared pool — pg handles connection reuse internally
+export const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    max: 10,
+    idleTimeoutMillis: 30_000,
+    connectionTimeoutMillis: 2_000,
+});
+
+pool.on('error', (err) => {
+    console.error('Unexpected pg pool error:', err);
+    process.exit(1);
+});
